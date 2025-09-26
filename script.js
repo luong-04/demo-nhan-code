@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(demNguocInterval);
   
             // Gọi Google Sheet API
-            fetch("https://script.google.com/macros/s/AKfycbwGL4GlG5khb8QXDYzDjBGRgfRlb2FLKMTDhB6p-OK_8PzpeG_Ksz7iGkDNfeUDIukl6A/exec") // đổi link này bằng link web app của bạn
+            fetch("https://script.google.com/macros/s/AKfycbyRqnJhZlSUu4laD25k6S6KtTRVAZ0kXiz7b2DjIIUMPMkRlSA_vyl63mrNPcpLyqoT9g/exec") // đổi link này bằng link web app của bạn
               .then(res => res.json())
               .then(data => {
                 if (data.success) {
