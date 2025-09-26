@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   container.addEventListener('click', function() {
     if (nutImg.style.display !== 'none') {
-      // Lấy IP của người dùng
+      // Bắt đầu lấy IP của người dùng từ một API công khai
       fetch("https://api.ipify.org?format=json")
         .then(response => response.json())
         .then(ipData => {
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Random 90–120 giây
           var thoiGianDemNguoc = Math.floor(Math.random() * 31) + 90;
+
           nutImg.style.display = 'none';
           nenDemNguoc.style.display = 'flex';
           container.style.cursor = 'default';
@@ -22,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (thoiGianDemNguoc <= 0) {
               clearInterval(demNguocInterval);
 
-              // Gọi Google Sheet API với IP được truyền vào URL
-              fetch("https://script.google.com/macros/s/AKfycbyRqnJhZlSUu4laD25k6S6KtTRVAZ0kXiz7b2DjIIUMPMkRlSA_vyl63mrNPcpLyqoT9g/exec" + userIp) // Cập nhật URL và thêm tham số ?ip=
+              // Gọi Google Sheet API, truyền IP vào tham số URL
+              fetch("https://script.google.com/macros/s/AKfycbyRqnJhZlSUu4laD25k6S6KtTRVAZ0kXiz7b2DjIIUMPMkRlSA_vyl63mrNPcpLyqoT9g/exec?ip=" + userIp)
                 .then(res => res.json())
                 .then(data => {
                   if (data.success) {
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 1000);
         })
         .catch(err => {
+          // Xử lý lỗi nếu không thể lấy được IP
           demNguocText.textContent = "Không thể lấy IP của bạn!";
         });
     }
